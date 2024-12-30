@@ -8,12 +8,22 @@ services:
     depends_on:
       - db
     environment:
-      - SPRING_DATA_MONGODB_URI=mongodb://db:27017/url_shortener_db
+      - SPRING_DATA_MONGODB_URI=mongodb://root:password@urlshortener-url_shortener:27017/url_shortener_db
+    networks:
+      - default
 
   db:
-    image: mongo:6.0
-    container_name: mongo-db
+    image: mongo:latest
+    container_name: urlshortener-url_shortener
     environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
       MONGO_INITDB_DATABASE: url_shortener_db
     ports:
       - "27017:27017"
+    networks:
+      - default
+
+networks:
+  default:
+    driver: bridge
