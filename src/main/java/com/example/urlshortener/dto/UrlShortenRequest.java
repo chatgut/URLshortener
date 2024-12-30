@@ -1,6 +1,6 @@
 package com.example.urlshortener.dto;
 
-public class requestDto {
+public class UrlShortenRequest {
     private String originalUrl;
 
     public String getOriginalUrl() {

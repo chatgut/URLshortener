@@ -1,9 +1,9 @@
 package com.example.urlshortener.dto;
 
-public class responseDto {
+public class UrlShortenResponse {
     private String shortenedUrl;
 
-    public responseDto(String shortenedUrl) {
+    public UrlShortenResponse(String shortenedUrl) {
         this.shortenedUrl = shortenedUrl;
     }
 
