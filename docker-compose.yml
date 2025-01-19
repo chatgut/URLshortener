@@ -1,29 +1,32 @@
-version: '3.8'
-
+version: "3.9"
 services:
-  url_shortener:
-    build: .
-    ports:
-      - "8080:8080"
-    depends_on:
-      - db
-    environment:
-      - SPRING_DATA_MONGODB_URI=mongodb://root:password@urlshortener-url_shortener:27017/url_shortener_db
-    networks:
-      - default
-
-  db:
+  mongo:
     image: mongo:latest
-    container_name: urlshortener-url_shortener
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: password
-      MONGO_INITDB_DATABASE: url_shortener_db
+    container_name: mongo
     ports:
       - "27017:27017"
     networks:
-      - default
+      - urlshortener-network
+    volumes:
+      - mongo-data:/data/db
+
+  url_shortener:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: url_shortener
+    ports:
+      - "8080:8080"
+    networks:
+      - urlshortener-network
+    depends_on:
+      - mongo
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb://mongo:27017/urlshortener
 
 networks:
-  default:
+  urlshortener-network:
     driver: bridge
+
+volumes:
+  mongo-data:

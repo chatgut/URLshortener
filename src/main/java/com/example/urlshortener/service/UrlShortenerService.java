@@ -19,16 +19,13 @@ public class UrlShortenerService {
     }
 
     public UrlShortenResponse shortenUrl(UrlShortenRequest request) {
-        // Check if URL already exists
         Optional<UrlMapping> existingMapping = repository.findByOriginalUrl(request.getOriginalUrl());
         if (existingMapping.isPresent()) {
             return new UrlShortenResponse(existingMapping.get().getShortenedUrl());
         }
 
-        // Generate shortened URL
         String shortenedUrl = UUID.randomUUID().toString().substring(0, 8);
 
-        // Save to database
         UrlMapping mapping = new UrlMapping();
         mapping.setOriginalUrl(request.getOriginalUrl());
         mapping.setShortenedUrl(shortenedUrl);

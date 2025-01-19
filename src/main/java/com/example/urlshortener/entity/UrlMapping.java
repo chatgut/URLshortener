@@ -11,7 +11,6 @@ public class UrlMapping {
     private String originalUrl;
     private String shortenedUrl;
 
-    // Getters and Setters
     public String getId() {
         return id;
     }
