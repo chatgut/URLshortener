@@ -1,55 +1,60 @@
-URL Shortener Service 2024
+**URL Shortener Microservice**
 
-This project provides a microservice for generating shortened URLs from long URLs. It also allows retrieving the original URL from a shortened one.
-How to Run
+This microservice provides functionality to generate shortened URLs and resolve them back to their original URLs. It is built using Spring Boot and uses MongoDB as its database.
 
-    Clone the Repository
-    Download the project from the repository (replace <your-repo> with the correct URL):
+**How to Run**
 
-git clone <your-repo>
-cd URLShortenerService2024
+    Clone the repository:
 
-Start the Services with Docker Compose
+git clone https://github.com/chatgut/URLshortener.git
+cd URLshortener  
+
 Build and run the services using Docker Compose:
 
-    docker-compose up --build
+    docker-compose up --build  
 
-    This will launch two containers:
-        url_shortener: The main URL shortener service running on port 8080.
-        db: A MongoDB database for storing URL mappings.
+    This will start two services:
+        url_shortener: The URL shortener service available on port 8080.
+        mongo: The MongoDB database for storing URL mappings.
 
-How to Test
-1. Create a Shortened URL
+**Testing the Service**
+
+1. Shorten a URL
+
+Send a POST request to shorten a long URL:
 
 Endpoint:
 POST http://localhost:8080/api/v1/urls/shorten
 
 Request Body:
 
-{
-  "originalUrl": "https://www.example.com"
-}
+{  
+  "originalUrl": "https://www.example.com"  
+}  
 
-Response:
+Response Example:
 
-{
-  "shortenedUrl": "xyz12345"
-}
+{  
+  "shortenedUrl": "abcd1234"  
+}  
 
-2. Retrieve the Original URL
+2. Resolve a Shortened URL
+
+Use a GET request to retrieve the original URL:
 
 Endpoint:
 GET http://localhost:8080/api/v1/urls/{shortenedUrl}
 
-For example, if the shortened URL is abc12345, you can access:
-http://localhost:8080/api/v1/urls/abc12345
+Replace {shortenedUrl} with the value returned from the POST request.
 
-Response:
+Example:
+GET http://localhost:8080/api/v1/urls/abcd1234
+
+Response Example:
 The original URL (e.g., https://www.example.com) will be returned as plain text.
-Stopping the Services
+Notes
 
-To stop and remove the running containers, execute:
+    Ensure Docker is installed and running on your system before starting the services.
+    MongoDB data is stored in a container volume, so it persists between container restarts.
 
-docker-compose down
-
-This guide outlines the steps to deploy and interact with the URL shortener microservice.
+This microservice is ready for deployment and horizontal scaling.
