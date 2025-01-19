@@ -4,12 +4,15 @@ This microservice provides functionality to generate shortened URLs and resolve 
 
 **How to Run**
 
-    Clone the repository:
+1. **Clone the repository**
 
 git clone https://github.com/chatgut/URLshortener.git
+
+2. **Navigate to the project**
+
 cd URLshortener  
 
-Build and run the services using Docker Compose:
+3. **Build and run the services**:
 
     docker-compose up --build  
 
