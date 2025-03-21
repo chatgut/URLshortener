@@ -60,4 +60,3 @@ Notes
     Ensure Docker is installed and running on your system before starting the services.
     MongoDB data is stored in a container volume, so it persists between container restarts.
 
-This microservice is ready for deployment and horizontal scaling.
